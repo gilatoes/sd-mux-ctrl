@@ -92,10 +92,38 @@ Dev: 0, Manufacturer: SRPOL, Serial: sd-wire_11, Description: sd-wire
 
 # Connect to RPI
 ```
-sudo sd-mux-ctrl --device-serial=sd-wire_11 --dut
+sudo sd-mux-ctrl --device-serial=sd-wire_11 --rpi
 ```
 
 # Connect to Host
 ```
-sudo sd-mux-ctrl --device-serial=sd-wire_11 --TS
+sudo sd-mux-ctrl --device-serial=sd-wire_11 --host
+```
+
+# Install Etcher 
+
+```
+curl -1sLf \
+   'https://dl.cloudsmith.io/public/balena/etcher/setup.deb.sh' \
+   | sudo -E bash
+```
+
+Update and install the etcher repo
+```
+sudo apt-get update
+sudo apt-get install balena-etcher-electron
+```
+
+Remove ether
+```
+sudo apt-get remove balena-etcher-electron
+rm /etc/apt/sources.list.d/balena-etcher.list
+apt-get clean
+rm -rf /var/lib/apt/lists/*
+apt-get update
+```
+
+# Download the RPI images
+```
+https://www.raspberrypi.com/software/operating-systems/
 ```
