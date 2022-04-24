@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11   CMakeFiles/sd-mux-ctrl.dir/main.cpp.o  -o sd-mux-ctrl -rdynamic -lftdi1 -lusb-1.0 -lpopt 

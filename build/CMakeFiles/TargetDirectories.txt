@@ -1,0 +1,13 @@
+/home/gary/sd-mux/build/CMakeFiles/install.dir
+/home/gary/sd-mux/build/CMakeFiles/list_install_components.dir
+/home/gary/sd-mux/build/CMakeFiles/install/strip.dir
+/home/gary/sd-mux/build/CMakeFiles/install/local.dir
+/home/gary/sd-mux/build/CMakeFiles/rebuild_cache.dir
+/home/gary/sd-mux/build/CMakeFiles/edit_cache.dir
+/home/gary/sd-mux/build/src/CMakeFiles/install.dir
+/home/gary/sd-mux/build/src/CMakeFiles/list_install_components.dir
+/home/gary/sd-mux/build/src/CMakeFiles/rebuild_cache.dir
+/home/gary/sd-mux/build/src/CMakeFiles/sd-mux-ctrl.dir
+/home/gary/sd-mux/build/src/CMakeFiles/install/strip.dir
+/home/gary/sd-mux/build/src/CMakeFiles/install/local.dir
+/home/gary/sd-mux/build/src/CMakeFiles/edit_cache.dir
