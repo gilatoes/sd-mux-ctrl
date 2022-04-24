@@ -607,7 +607,7 @@ int showStatus(CCOptionValue options[]) {
            ret = EXIT_FAILURE;
            goto finish_him;
        }
-       fprintf(stdout, "SD connected to: %s\n", pins & SOCKET_SEL ? "TS" : "DUT");
+       fprintf(stdout, "SD connected to: %s\n", pins & SOCKET_SEL ? "Host" : "RPI");
        goto finish_him;
     }
 
@@ -623,7 +623,7 @@ int showStatus(CCOptionValue options[]) {
            goto finish_him;
        }
 
-       fprintf(stdout, "SD connected to: %s\n", pins & UM_SOCKET_SEL ? "TS" : "DUT");
+       fprintf(stdout, "SD connected to: %s\n", pins & UM_SOCKET_SEL ? "Host" : "RPI");
        goto finish_him;
     }
 
@@ -633,8 +633,8 @@ int showStatus(CCOptionValue options[]) {
         goto finish_him;
     }
 
-    fprintf(stdout, "USB connected to: %s\n", pins & USB_SEL ? "TS" : "DUT");
-    fprintf(stdout, "SD connected to: %s\n", pins & SOCKET_SEL ? "TS" : "DUT");
+    fprintf(stdout, "USB connected to: %s\n", pins & USB_SEL ? "Host" : "RPI");
+    fprintf(stdout, "SD connected to: %s\n", pins & SOCKET_SEL ? "Host" : "RPI");
 
 finish_him:
 	fprintf(stderr, "ShowStatus: exit\n");
@@ -697,11 +697,11 @@ int parseArguments(int argc, const char **argv, CCCommand *cmd, int *arg, char *
             { "show-serial", 'o', POPT_ARG_NONE, NULL, 'o', "displays serial number of given device", NULL },
             { "set-serial", 'r', POPT_ARG_STRING, &serial, 'r', "writes serial number to given device", NULL },
             { "init", 't', POPT_ARG_NONE, NULL, 't', "initialize target board", NULL },
-            { "dut", 'd', POPT_ARG_NONE, NULL, 'd', "connects SD card and USB to the target board", NULL },
-            { "ts", 's', POPT_ARG_NONE, NULL, 's', "connects SD card and USB to the test server", NULL },
+            { "rpi", 'd', POPT_ARG_NONE, NULL, 'd', "connects SD card and USB to the raspberry pi board", NULL },
+            { "host", 's', POPT_ARG_NONE, NULL, 's', "connects SD card and USB to the Ubuntu host", NULL },
             { "pins", 'p', POPT_ARG_INT, arg, 'p', "write pin state in bitbang mode", NULL },
             { "tick", 'c', POPT_ARG_NONE, NULL, 'c', "turn off and on power supply of DUT", NULL },
-            { "status", 'u', POPT_ARG_NONE, NULL, 'u', "show current status: DUT or TS or NOINIT", NULL },
+            { "status", 'u', POPT_ARG_NONE, NULL, 'u', "show current status: RPI or HOST or NOINIT", NULL },
             { "dyper1", 'y', POPT_ARG_STRING, &options[CCO_DyPer].args, 'y', "Connect or disconnect terminals of 1st dynamic jumper; STRING = \"on\" or \"off\"", NULL },
             { "dyper2", 'z', POPT_ARG_STRING, &options[CCO_DyPer].args, 'z', "Connect or disconnect terminals of 2nd dynamic jumper; STRING = \"on\" or \"off\"", NULL },
             // Options
