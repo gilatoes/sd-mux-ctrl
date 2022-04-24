@@ -2,15 +2,20 @@
 The SD Mux Control software prerequisite:
 # Original SDWire
 https://git.tizen.org/cgit/tools/testlab/sd-mux/
+Information:
+https://docs.dasharo.com/transparent-validation/sd-wire/getting-started/
+https://wiki.tizen.org/SDWire
 
-# FTDI 
+# FTDI driver 
 https://www.intra2net.com/en/developer/libftdi/download.php
 
-For Ubuntu 16.04 LTS, the FTDI library is version 1.2. but SD Mux will requires 1.4 version to start compiling.
+For Ubuntu 16.04 LTS, the apt-get install FTDI library is version 1.2. but SDWire requires >1.4 version to be build using cmake. Therefore the FTDI library needs to be built.
 
-Therefore it is required to rebuild the FTDI library.
+Other version of Ubuntu might comes with FTDI > 1.4 and can skip the build process.
 
-Rebuilding the FTDI library will requires the following libraries and dependencies:
+## Building the FTDI driver
+Building the FTDI library will requires the following libraries and dependencies:
+```
 sudo apt-get install build-essential
 sudo apt-get install git-core
 sudo apt-get install cmake
@@ -19,13 +24,13 @@ sudo apt-get install libusb-1.0-devel
 sudo apt-get install libconfuse-dev
 sudo apt-get install swig python-dev
 sudo apt-get install libboost-all-dev
+```
 
-# Get the source:
+## Get the and build the source:
+```
 git clone git://developer.intra2net.com/libftdi
 cd libftdi
 
-# Building the source:
-```
 cd libftdi
 mkdir build
 cd build
@@ -33,8 +38,8 @@ cmake  -DCMAKE_INSTALL_PREFIX="/usr" ../
 make
 sudo make install
 ```
-
-# Get the prerequisite for the SDWire library:
+# Building the SDWire library
+# Install the prerequisite for the SDWire library:
 [comment]: <> (sudo apt-get install libftdi1-dev)
 ```
 sudo apt-get install libpopt-dev
@@ -43,7 +48,7 @@ sudo apt-get install cmake
 
 # Build the SDWire library:
 ```
-git clone https://git.tizen.org/cgit/tools/testlab/sd-mux
+git clone https://github.com/gilatoes/sd-mux-ctrl
 cd sd-mux
 mkdir build
 cd build
@@ -51,11 +56,12 @@ cmake ..
 sudo make install
 ```
 
-# Connect the SDWire to the USB cable
+## Connect the SDWire microUSB to the host and read out the serial number, vendor and product ID
 ```
 dmesg -w
 ```
-# Get the vendor ID, serial number and product ID
+
+## Locate the values
 ```
 [26022.053124] usb 2-2.2: new full-speed USB device number 5 using uhci_hcd
 [26022.300217] usb 2-2.2: New USB device found, idVendor=0403, idProduct=6015
@@ -72,7 +78,8 @@ dmesg -w
 [26023.339730] usb 2-2.2: FTDI USB Serial Device converter now attached to ttyUSB0
 
 ```
-# Configure the SDWire:
+
+# Configure the SDWire memory:
 ```
 sudo sd-mux-ctrl --device-serial=DK6ZSFJ9 --vendor=0x0403 --product=0x6015 --device-type=sd-wire --set-serial=sd-wire_11
 ```
@@ -90,17 +97,25 @@ Dev: 0, Manufacturer: SRPOL, Serial: sd-wire_11, Description: sd-wire
 
 ```
 
-# Connect to RPI
+## Connect to RPI
 ```
 sudo sd-mux-ctrl --device-serial=sd-wire_11 --rpi
 ```
 
-# Connect to Host
+## Connect to Host
 ```
 sudo sd-mux-ctrl --device-serial=sd-wire_11 --host
 ```
 
-# Install Etcher 
+# Installing the Original RPI image
+Use Etcher to copy the Raspberry Pi image into the SD card.
+Download the image from:
+https://www.raspberrypi.com/software/operating-systems/
+
+For RPI lite,  the file is 2022-0404-raspios-bulleye-armhf-lite.img.xz
+Use the Etcher graphical software to copy the image to the SD card.
+
+## Install Etcher 
 
 ```
 curl -1sLf \
@@ -123,7 +138,3 @@ rm -rf /var/lib/apt/lists/*
 apt-get update
 ```
 
-# Download the RPI images
-```
-https://www.raspberrypi.com/software/operating-systems/
-```
