@@ -1,9 +1,9 @@
 # sd-mux-ctrl
 The SD Mux Control software prerequisite:
-#Original SDWire
+# Original SDWire
 https://git.tizen.org/cgit/tools/testlab/sd-mux/
 
-#FTDI 
+# FTDI 
 https://www.intra2net.com/en/developer/libftdi/download.php
 
 For Ubuntu 16.04 LTS, the FTDI library is version 1.2. but SD Mux will requires 1.4 version to start compiling.
@@ -20,35 +20,42 @@ sudo apt-get install libconfuse-dev
 sudo apt-get install swig python-dev
 sudo apt-get install libboost-all-dev
 
-#Get the source:
+# Get the source:
 git clone git://developer.intra2net.com/libftdi
 cd libftdi
 
-#Building the source:
+# Building the source:
+```
 cd libftdi
 mkdir build
 cd build
 cmake  -DCMAKE_INSTALL_PREFIX="/usr" ../
 make
 sudo make install
+```
 
-#Get the prerequisite for the SDWire library:
+# Get the prerequisite for the SDWire library:
 [comment]: <> (sudo apt-get install libftdi1-dev)
+```
 sudo apt-get install libpopt-dev
 sudo apt-get install cmake
+```
 
-#Build the SDWire library:
+# Build the SDWire library:
+```
 git clone https://git.tizen.org/cgit/tools/testlab/sd-mux
 cd sd-mux
 mkdir build
 cd build
 cmake ..
 sudo make install
+```
 
-#Connect the SDWire to the USB cable
+# Connect the SDWire to the USB cable
+```
 dmesg -w
-
-#Get the vendor ID, serial number and product ID
+```
+# Get the vendor ID, serial number and product ID
 ```
 [26022.053124] usb 2-2.2: new full-speed USB device number 5 using uhci_hcd
 [26022.300217] usb 2-2.2: New USB device found, idVendor=0403, idProduct=6015
@@ -65,13 +72,17 @@ dmesg -w
 [26023.339730] usb 2-2.2: FTDI USB Serial Device converter now attached to ttyUSB0
 
 ```
-#Configure the SDWire:
+# Configure the SDWire:
+```
 sudo sd-mux-ctrl --device-serial=DK6ZSFJ9 --vendor=0x0403 --product=0x6015 --device-type=sd-wire --set-serial=sd-wire_11
+```
 
-#Reconnect the USB and check the list command
+# Reconnect the USB and check the list command
+```
 sudo sd-mux-ctrl --list
+```
 
-##Expected Output:
+## Expected Output:
 ```
 xxx@ubuntu:~$ sudo sd-mux-ctrl --device-serial=sd-wire_11 --show-serial
 Number of FTDI devices found: 1
@@ -79,9 +90,12 @@ Dev: 0, Manufacturer: SRPOL, Serial: sd-wire_11, Description: sd-wire
 
 ```
 
-#Connect to RPI
+# Connect to RPI
+```
 sudo sd-mux-ctrl --device-serial=sd-wire_11 --dut
+```
 
-#Connect to Host
+# Connect to Host
+```
 sudo sd-mux-ctrl --device-serial=sd-wire_11 --TS
-
+```
