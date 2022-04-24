@@ -226,11 +226,11 @@ struct ftdi_context* openDevice(CCOptionValue options[], CCDeviceType *deviceTyp
         goto error;
     }
 
-fprintf(stderr, "reading ftdi_eeprom_get_strings\n");
+//fprintf(stderr, "reading ftdi_eeprom_get_strings\n");
     if (deviceType != NULL) {
 	//ftdi_eeprom_get_strings(ftdi, NULL, 0, product, sizeof(product), NULL, 0);
 	tmpDeviceType = CCDT_SDWIRE;
-fprintf(stderr, "get string ok\n");
+//fprintf(stderr, "get string ok\n");
         //tmpDeviceType = getDeviceTypeFromString(product);
         if (tmpDeviceType == CCDT_MAX) {
             fprintf(stderr, "Invalid device type. Device probably not configured!\n");
@@ -378,13 +378,13 @@ struct ftdi_context* prepareDevice(CCOptionValue options[], unsigned char *pins,
     struct ftdi_context *ftdi;
     int f;
 
-	fprintf(stderr, "PrepareDevice: Enter\n");
+	//fprintf(stderr, "PrepareDevice: Enter\n");
     ftdi = openDevice(options, deviceType);
     if (ftdi == NULL) {
-fprintf(stderr, "Error open device\n");
+//fprintf(stderr, "Error open device\n");
         return NULL;
     }
-fprintf(stderr, "open ok\n");
+//fprintf(stderr, "open ok\n");
 
     if (*deviceType == CCDT_SDWIRE || *deviceType == CCDT_USBMUX) {
         return ftdi; // None of the following steps need to be performed for this type of device.
@@ -407,7 +407,7 @@ fprintf(stderr, "open ok\n");
             return NULL;
         }
     }
-fprintf(stderr, "prepareDevice: Exit\n");
+//fprintf(stderr, "prepareDevice: Exit\n");
 
     return ftdi;
 }
@@ -593,15 +593,15 @@ int showStatus(CCOptionValue options[]) {
     unsigned char pins;
     CCDeviceType deviceType;
 
-	fprintf(stderr, "Preparing Device..\n");
+	//fprintf(stderr, "Preparing Device..\n");
     struct ftdi_context *ftdi = prepareDevice(options, &pins, &deviceType);
     if (ftdi == NULL)
         return EXIT_FAILURE;
 
-	fprintf(stderr, "Reading device type...\n");
+	//fprintf(stderr, "Reading device type...\n");
 
     if (deviceType == CCDT_SDWIRE) {
-	fprintf(stderr, "SDWire: Reading pins\n");
+	//fprintf(stderr, "SDWire: Reading pins\n");
        if (ftdi_read_pins(ftdi, &pins) != 0) {
            fprintf(stderr, "Error reading pins state.\n");
            ret = EXIT_FAILURE;
@@ -637,7 +637,7 @@ int showStatus(CCOptionValue options[]) {
     fprintf(stdout, "SD connected to: %s\n", pins & SOCKET_SEL ? "Host" : "RPI");
 
 finish_him:
-	fprintf(stderr, "ShowStatus: exit\n");
+	//fprintf(stderr, "ShowStatus: exit\n");
     ftdi_usb_close(ftdi);
     ftdi_free(ftdi);
 
